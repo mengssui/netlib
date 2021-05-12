@@ -1,3 +1,8 @@
+# 忽略文件夹build,bin
+build/*
+bin/*
+viscode/*
+
 # Prerequisites
 *.d
 
