@@ -1,4 +1,4 @@
-# nettlib: 基于muduo库实现C++11版本的轻量网络库
+# netlib: 基于muduo库实现C++11版本的轻量网络库
 > **version：0.1**
 >
 > Google风格编码
