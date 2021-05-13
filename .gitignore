@@ -1,7 +1,7 @@
 # 忽略文件夹build,bin
 build/*
 bin/*
-viscode/*
+.vscode/*
 
 # Prerequisites
 *.d
