@@ -6,7 +6,7 @@
 ## 更改方面：
 1. 时间戳实现封装C++11中的\<chrono>
 2. 原子操作即采用C++11中的atomic对int和long类型的特化版本
-3. 
+3. 使用C++11的mutex以及condition替代muduo封装的对应的类型
 
 
 

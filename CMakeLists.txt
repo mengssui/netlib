@@ -9,5 +9,5 @@ set(CMAKE_CXX_STANDARD 11)
 set(CMAKE_CXX_STANDARD_REQUIRED True)
 
 # 增加子目录，子目录中会有对应的CMakeLists.txt 
-add_subdirectory(test)
 add_subdirectory(src)
+add_subdirectory(test)
