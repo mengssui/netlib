@@ -4,7 +4,7 @@
  * @Author: Mengbw
  * @Date: 2021-05-14 21:11:38
  * @LastEditors: Mengbw
- * @LastEditTime: 2021-05-15 20:37:43
+ * @LastEditTime: 2021-05-15 21:01:00
 -->
 # 线程池的设计
 
@@ -89,3 +89,22 @@
 6. 分析代码发现可能是其中pop_front在队列非空的情况下依然pop因此出错
 7. F12进入pop_front源码发现果然没有判断是否为空的语句
 8. 加上`非空条件判断`就行了
+
+```C++
+ThreadPool::Task ThreadPool::getTask() {
+  //访问临界区加锁
+  std::unique_lock<std::mutex> loclock(mutex_);
+  //必须时候while，防止虚假唤醒
+  while (tasks_.empty() && running_) {
+    cond_.wait(loclock);
+  }
+  //当有任务才取出任务并且执行,否则这里会导致段错误的BUG
+  Task task; 
+  if (!tasks_.empty()) {
+    task = tasks_.front();
+    tasks_.pop_front();
+  }
+  return task;
+}
+这段代码就是导致了bug，当所有任务完成后，每个线程阻塞到了 cond_wait 语句处，当执行 stop操作时候，会唤醒所有线程，因此各个线程会执行取任务的操作，如果不加empty的判断的话，会从空的vector 执行pop操作，导致段错误.
+```

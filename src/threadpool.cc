@@ -44,7 +44,7 @@ void ThreadPool::stopAfterFinishAllTasks() {
 }
 
 void ThreadPool::stop() {
-  //if (running_ == false) return; //允许多次调用
+  if (running_ == false) return; //允许多次调用
   { //减少锁的粒度
     std::unique_lock<std::mutex> lock(mutex_);
     running_ = false;
@@ -97,7 +97,7 @@ ThreadPool::Task ThreadPool::getTask() {
   while (tasks_.empty() && running_) {
     cond_.wait(loclock);
   }
-  //取出任务并且执行
+  //当有任务才取出任务并且执行,否则这里会导致段错误的BUG
   Task task; 
   if (!tasks_.empty()) {
     task = tasks_.front();

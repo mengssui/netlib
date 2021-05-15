@@ -4,7 +4,7 @@
  * @Author: Mengbw
  * @Date: 2021-05-14 19:30:51
  * @LastEditors: Mengbw
- * @LastEditTime: 2021-05-15 20:34:21
+ * @LastEditTime: 2021-05-15 20:58:17
  */
 
 #include "threadpool.h"
@@ -38,13 +38,15 @@ int main () {
     tp.runTask(std::bind(&Output::outputInfo, &out, i));
   }
   
-  std::this_thread::sleep_for(netlib::Second(1));
 
+  std::this_thread::sleep_for(netlib::Second(2));
   tp.stop();
+  std::this_thread::sleep_for(netlib::Second(3));
    
   LOG_INFO << std::this_thread::get_id();
 
-  //FIXME:如果子线程完成所有的任务时候，会出现的段错误@mengbw
+  //如果子线程完成所有的任务时候，会出现的段错误@mengbw
+  //FIXED:@mengbw: 错误原因:由于pop_front从空的vector pop导致错误[已修复]
 
   return 0;
 }
