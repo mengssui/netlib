@@ -8,7 +8,6 @@ namespace netlib {
 
 ThreadPool::ThreadPool(const std::string &name)
   : name_(name), running_(false) {
-    std::cout << "run threadpool : " << name_ << std::endl;
   }
 ThreadPool::~ThreadPool(){
   //如果线程池在运行就停止
@@ -16,18 +15,17 @@ ThreadPool::~ThreadPool(){
   if (running_) {
     stop();
   }
-  std::cout << "threadpool stop" << std::endl;
 }
 
 void ThreadPool::start(int numthreads) {
   //assert不在std命名空间
   assert(threads_.empty());
-  std::cout << "threadpool run" << std::endl;
   running_ = true; //运行开始
   threads_.reserve(numthreads);
   for (int i = 0; i < numthreads; i++) {
     //类的成员函数有默认this指针
-    threads_.push_back(std::unique_ptr<std::thread>(new std::thread(&ThreadPool::runInThread, this)));
+    threads_.push_back(std::unique_ptr<std::thread>(
+                       new std::thread(&ThreadPool::runInThread, this)));
   }
 }
 
@@ -46,7 +44,7 @@ void ThreadPool::stopAfterFinishAllTasks() {
 }
 
 void ThreadPool::stop() {
-  if (running_ == false) return; //允许多次调用
+  //if (running_ == false) return; //允许多次调用
   { //减少锁的粒度
     std::unique_lock<std::mutex> lock(mutex_);
     running_ = false;
@@ -58,7 +56,6 @@ void ThreadPool::stop() {
   for (auto it = threads_.begin(); it != threads_.end(); it++) {
     (*it)->join(); //等待所有线程执行结束
   }
-  std::cout << "left tasks numbers : " << tasks_.size() << std::endl;
   return; 
 }
 
@@ -101,8 +98,11 @@ ThreadPool::Task ThreadPool::getTask() {
     cond_.wait(loclock);
   }
   //取出任务并且执行
-  Task task = tasks_.front(); 
-  tasks_.pop_front();
+  Task task; 
+  if (!tasks_.empty()) {
+    task = tasks_.front();
+    tasks_.pop_front();
+  }
   return task;
 }
 

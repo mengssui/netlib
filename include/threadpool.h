@@ -4,12 +4,13 @@
  * @Author: Mengbw
  * @Date: 2021-05-13 15:35:48
  * @LastEditors: Mengbw
- * @LastEditTime: 2021-05-13 21:05:38
+ * @LastEditTime: 2021-05-15 16:22:50
  */
 #ifndef NETLIB_THREAD_POOL_
 #define NETLIB_THREAD_POOL_
 
 #include "noncopyable.h"
+#include "atomicint.h"
 
 #include <string>
 #include <condition_variable> 
@@ -47,7 +48,7 @@ private:
   std::condition_variable cond_;   //条件变量
   std::mutex mutex_;               //互斥锁 
   std::deque<Task> tasks_;         //任务队列
-  bool running_;                   //线程池是否运行中
+  netlib::AtomicBool running_;     //线程池是否运行中
   std::vector<ThreadPtr> threads_; //线程对象的指针的数组
 };
 
