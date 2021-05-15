@@ -4,7 +4,7 @@
  * @Author: Mengbw
  * @Date: 2021-05-13 09:34:18
  * @LastEditors: Mengbw
- * @LastEditTime: 2021-05-13 10:02:29
+ * @LastEditTime: 2021-05-14 21:26:35
  */
 #ifndef NETLIB_ATOMIC_INT_
 #define NETLIB_ATOMIC_INT_
@@ -16,6 +16,7 @@ namespace netlib {
 
   typedef std::atomic_int AtomicInt32;
   typedef std::atomic_long AtomicInt64;
+  typedef std::atomic_bool AtomicBool;
   
 } // namespace netlib 
 
