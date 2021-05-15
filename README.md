@@ -1,7 +1,14 @@
 # nettlib: 基于muduo库实现C++11版本的轻量网络库
 > **version：0.1**
 >
-> Google风格编码
+
+## Google风格编码
+1. 类名、结构体、枚举、typedef 大驼峰 `ThreadPool`
+2. 普通变量，小写加下划线 `first_name` 
+3. class类成员变量最后加下划线, struct 不用 `ThreadPool::name_`
+4. 常量命名：k开头大小写混写   `const int kDaysInAWeek = 7`, 枚举变量同
+5. 函数命名：小驼峰
+
 
 ## 更改方面：
 1. 时间戳实现封装C++11中的\<chrono>

@@ -17,5 +17,8 @@ add_executable(thread_test thread_test.cc)
 target_link_libraries(thread_test pthread)
 
 add_executable(threadpool_test threadpool_test.cc)
-target_link_libraries(threadpool_test pthread threadpool_static)
+target_link_libraries(threadpool_test mynetlib)
+
+add_executable(logger_test logger_test.cc)
+target_link_libraries(logger_test mynetlib)
 

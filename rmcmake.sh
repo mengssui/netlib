@@ -1,4 +1,12 @@
 #!/bin/bash
+###
+ # @Descripttion: 
+ # @version: 0.1
+ # @Author: Mengbw
+ # @Date: 2021-05-15 19:08:03
+ # @LastEditors: Mengbw
+ # @LastEditTime: 2021-05-15 19:08:03
+### 
 
 #set -x
 set -u 
@@ -16,6 +24,12 @@ if [[ -e "./build" ]];then
 else
   echo "No need to clear ./build"
 fi
-# cd $FULLBIN
+
+if [[ -e "./lib" ]];then
+  rm -rf ./lib
+  echo "Clear ./lib Cmake Finish!"
+else
+  echo "No need to clear ./lib"
+fi
 
 
