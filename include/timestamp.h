@@ -4,15 +4,16 @@
  * @Author: Mengbw
  * @Date: 2021-05-12 09:39:46
  * @LastEditors: Mengbw
- * @LastEditTime: 2021-05-12 16:15:06
+ * @LastEditTime: 2021-05-14 20:27:43
  */
 #ifndef NETLIB_TIMESTAMP_H_
 #define NETLIB_TIMESTAMP_H_
 
 #include "copyable.h"
 
-#include <iostream>
 #include <chrono>
+#include <string>
+#include <ctime>
 
 namespace netlib {
 
@@ -34,16 +35,15 @@ class Timestamp : public netlib::Copyable,
   static nowtimestamp nowAfter(Microseconds interval) {
     return now() + interval;
   }
+  static std::string getTimeFormat() {
+    time_t t = Clock::to_time_t(now());
+    tm* local = localtime(&t);
+    char buf[64] = {0};
+    strftime(buf, 64, "%Y-%m-%d %H:%M:%S", local);
+    return std::string(buf);
+  }
 };
-  
 
 } // namespace netlib
-
-//重载左移运算符
-std::ostream &operator<<(std::ostream &out, const netlib::Timestamp &rhs) {
-  out << std::chrono::system_clock::to_time_t(rhs.now());
-  return out;
-}
-
 
 #endif //NETLIB_TIMESTAMP_H_

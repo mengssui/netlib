@@ -4,7 +4,7 @@
  * @Author: Mengbw
  * @Date: 2021-05-12 11:07:40
  * @LastEditors: Mengbw
- * @LastEditTime: 2021-05-12 16:11:20
+ * @LastEditTime: 2021-05-14 20:28:06
  */
 #include "timestamp.h"
 
@@ -23,7 +23,8 @@ int main () {
   auto nowafter = netlib::Timestamp::nowAfter(netlib::Microseconds(232));
   cout << std::chrono::duration_cast<netlib::Microseconds>(nowafter - now).count() << endl;
   cout << std::chrono::system_clock::to_time_t(netlib::Timestamp::now()) << endl;
-  cout << netlib::Timestamp();
+  cout << netlib::Timestamp::getTimeFormat() << endl;
+  cout << netlib::Timestamp::getTimeFormat() << endl;
 
   return 0;
 }
