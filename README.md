@@ -1,3 +1,11 @@
+<!--
+ * @Descripttion: 
+ * @version: 0.1
+ * @Author: Mengbw
+ * @Date: 2021-05-17 20:31:51
+ * @LastEditors: Mengbw
+ * @LastEditTime: 2021-05-17 20:31:51
+-->
 # netlib: 基于muduo库实现C++11版本的轻量网络库
 > **version：0.1**
 >
@@ -25,3 +33,7 @@
 - 优化重构: 重构（不是新增功能，也不是修复bug的代码变动）
 - 测试新增: 增加了新的测试
 - 辅助变动: 构建过程或辅助工具的变动
+
+## .vscode 文件夹
+该项目是在vscode平台, 通过sshremote插件实现远程连接到云主机
+.vscode文件夹是相关的一些设置
